@@ -29,10 +29,14 @@ graph TD
 ### Stage 2: Batch Translation
 *   **Action:** Proceed with translating all remaining chapters, frontmatter, and backmatter, keeping the approved Chapter 1 as the system context reference.
 
-### Sub-Agent Delegation Strategy (Cognitive Shielding)
-When utilizing multi-agent hierarchies to parallelize the translation of a large book, a major pitfall is cognitive overload. Passing the entire technical pipeline, extraction scripts, and EPUB packaging rules to every worker sub-agent wastes tokens and causes distraction.
-*   **Rule:** The parent agent must shield sub-agents from global automation and structural packaging details.
-*   **Execution:** The parent agent should extract the relevant text portions and supply the sub-agent with **ONLY** the **Section 3: Linguistic Style & Vocabulary Guide** of this document, alongside the target XHTML file. The sub-agent's sole responsibility is high-fidelity linguistic translation.
+### Sub-Agent Delegation Strategy (Cognitive Shielding & Context Isolation)
+When utilizing multi-agent hierarchies to parallelize the translation of a large book, two major pitfalls are cognitive overload and main-agent context length exhaustion.
+*   **Rule 1: Direct File Modification (No Content Funneling):** Sub-agents must **never** return translated chapters as text payloads back to the main agent for writing. Passing massive book contents through the main agent creates extreme context window pressure. Instead, sub-agents must read from and write to the target files directly on disk.
+*   **Rule 2: Separation of Technical & Linguistic Concerns:** The main agent must shield sub-agents from global automation and structural packaging details. The main agent serves solely as a coordinator, managing the translation pipeline, invoking workers, and collecting progress feedback without processing the actual book content.
+*   **Execution Workflow:**
+    1.  **Translation Phase:** The main agent spawns a translator sub-agent. This sub-agent is supplied with **Section 3: Linguistic Style & Vocabulary Guide** and the path to the target XHTML file. The translator sub-agent directly reads, translates, and overwrites the target file on disk.
+    2.  **Review Phase:** The main agent spawns a separate, independent reviewer sub-agent. This reviewer reads the modified file directly, performs objective evaluation, polishes the colloquial styling, and saves the finalized version directly to disk.
+    3.  **Reporting:** Sub-agents report only high-level work summaries, completion status, and feedback to the main agent. Book contents do not enter the main agent's context.
 
 ---
 
