@@ -2,6 +2,42 @@
 import os
 import zipfile
 import sys
+import re
+
+def update_language(source_dir, target_lang="zh-HK"):
+    """
+    Updates language attributes in HTML files and package.opf to target_lang.
+    Handles any existing language code using regex.
+    """
+    print(f"Updating language to {target_lang} in source files...")
+    
+    for root, dirs, files in os.walk(source_dir):
+        for file in files:
+            filepath = os.path.join(root, file)
+            
+            # Update HTML files (lang="...")
+            if file.endswith(".html"):
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Replace lang="any-code" with lang="zh-HK"
+                new_content = re.sub(r'lang="[^"]*"', f'lang="{target_lang}"', content)
+                
+                if new_content != content:
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        f.write(new_content)
+
+            # Update package.opf (<dc:language>...</dc:language>)
+            elif file == "package.opf":
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                
+                # Replace <dc:language>any-code</dc:language> with <dc:language>zh-HK</dc:language>
+                new_content = re.sub(r'<dc:language>[^<]*</dc:language>', f'<dc:language>{target_lang}</dc:language>', content)
+                
+                if new_content != content:
+                    with open(filepath, 'w', encoding='utf-8') as f:
+                        f.write(new_content)
 
 def repackage_epub(source_dir, output_epub):
     """
@@ -15,6 +51,9 @@ def repackage_epub(source_dir, output_epub):
     if not os.path.exists(mimetype_path):
         print(f"Error: 'mimetype' file not found at '{mimetype_path}'")
         sys.exit(1)
+
+    # Update language before packaging
+    update_language(source_dir)
 
     print(f"Packaging EPUB from '{source_dir}' into '{output_epub}'...")
 
