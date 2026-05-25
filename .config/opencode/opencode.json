@@ -1,0 +1,65 @@
+{
+  "provider":{
+    "openai":{
+      "options":{
+        "baseURL":"http://100.106.197.135:1234/v1",
+        "apiKey":"lm-studio"
+      },
+      "models":{
+        "gemma-4-26b-a4b-it":{
+          "name":"Gemma 4 26B A4B IT (Local)",
+          "limit":{
+            "context":65536,
+            "output":16384
+          },
+          "options":{
+            "store":false
+          },
+          "variants":{
+            "low":{
+              
+            },
+            "medium":{
+              
+            },
+            "high":{
+              
+            },
+            "xhigh":{
+              
+            }
+          }
+        }
+      }
+    }
+  },
+  "agent":{
+    "build":{
+      "options":{
+        "store":false
+      }
+    },
+    "plan":{
+      "options":{
+        "store":false
+      }
+    },
+    "language-translator":{
+      "mode":"subagent",
+      "model":"openrouter/google/gemma-4-26b-a4b-it"
+    }
+  },
+  "command": {
+    "translate-1st": {
+      "description": "1st pass translation to spoken Cantonese",
+      "agent": "language-translator",
+      "subtask": true
+    },
+    "translate-2nd": {
+      "description": "2nd pass review and polish of Cantonese translation",
+      "agent": "language-translator",
+      "subtask": true
+    }
+  },
+  "$schema":"https://opencode.ai/config.json"
+}
