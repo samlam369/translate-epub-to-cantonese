@@ -12,10 +12,14 @@ This document serves as the standard operating procedure (SOP) for the translati
 - **Review:** Request human sign-off on the tone.
 
 ### Phase 2: Batch Translation
-- **Action:** Proceed with all remaining chapters in parallel.
+- **Action:** Proceed with all remaining chapters in batches of 10 files.
+- **Todo Management:** Each batch of 10 files (1st + 2nd pass) is tracked as a single todo list item.
+- **Parallel Strategy:** Launch 5 subagents at a time.
+  - **Round 1:** All 5 subagents complete 1st pass for their assigned files.
+  - **Round 2:** All 5 subagents complete 2nd pass for their assigned files.
 - **Execution:**
-  1. **1st Pass:** `/translate-1st <file_path>`
-  2. **2nd Pass:** `/translate-2nd <file_path>`
+  1. **1st Pass:** `/translate-1st <file_path>` (parallel across 5 subagents)
+  2. **2nd Pass:** `/translate-2nd <file_path>` (parallel across 5 subagents)
   3. **Reporting:** Sub-agents report completion status to the main agent.
 
 ---
