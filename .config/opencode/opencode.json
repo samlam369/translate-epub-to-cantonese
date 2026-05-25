@@ -1,67 +1,49 @@
 {
-  "provider":{
-    "openai":{
-      "options":{
-        "baseURL":"http://100.106.197.135:1234/v1",
-        "apiKey":"lm-studio"
+  "provider": {
+    "openai": {
+      "options": {
+        "baseURL": "http://100.106.197.135:1234/v1",
+        "apiKey": "lm-studio"
       },
-      "models":{
-        "gemma-4-26b-a4b-it":{
-          "name":"Gemma 4 26B A4B IT (Local)",
-          "limit":{
-            "context":65536,
-            "output":16384
+      "models": {
+        "gemma-4-26b-a4b-it": {
+          "name": "Gemma 4 26B A4B IT (Local)",
+          "limit": {
+            "context": 65536,
+            "output": 16384
           },
-          "options":{
-            "store":false
+          "options": {
+            "store": false
           },
-          "variants":{
-            "low":{
-              
-            },
-            "medium":{
-              
-            },
-            "high":{
-              
-            },
-            "xhigh":{
-              
-            }
+          "variants": {
+            "low": {},
+            "medium": {},
+            "high": {},
+            "xhigh": {}
           }
         }
       }
     }
   },
-  "agent":{
-    "build":{
-      "options":{
-        "store":false
+  "agent": {
+    "build": {
+      "options": {
+        "store": false
       }
     },
-    "plan":{
-      "options":{
-        "store":false
+    "plan": {
+      "options": {
+        "store": false
       }
     },
-    "language-translator":{
-      "mode":"subagent",
-      "model":"openrouter/google/gemma-4-26b-a4b-it"
-    }
-  },
-  "command": {
     "translate-1st": {
-      "description": "1st pass translation to spoken Cantonese",
-      "template": "commands/translate-1st.md",
-      "agent": "language-translator",
-      "subtask": true
+      "mode": "subagent",
+      "model": "openrouter/google/gemma-4-26b-a4b-it"
     },
     "translate-2nd": {
-      "description": "2nd pass review and polish of Cantonese translation",
-      "template": "commands/translate-2nd.md",
-      "agent": "language-translator",
-      "subtask": true
+      "mode": "subagent",
+      "model": "openrouter/google/gemma-4-26b-a4b-it"
     }
   },
-  "$schema":"https://opencode.ai/config.json"
+  "$schema": "https://opencode.ai/config.json"
 }
