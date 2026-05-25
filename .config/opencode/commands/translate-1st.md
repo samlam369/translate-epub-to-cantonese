@@ -47,6 +47,11 @@ Below is the current content of the target file:
 - [ ] **Valid XML Entities:** Use `&#160;` for `&nbsp;`, `&#8722;` for `&minus;`, etc.
 - [ ] **Well-formed XHTML:** Match all tags. Preserve IDs and anchors.
 
-## 6. Instructions
+## 6. Workflow Optimization (CRITICAL)
+- **Final Report Integration:** To save tokens, assume that once your final action (tool call) succeeds, the Harness may immediately terminate you and return your response to the Main Agent.
+- **Timing:** If you have NO further planned actions, you MUST include a comprehensive summary of your work (the "Final Report") in the same response as your final tool call.
+- **Efficiency:** Do not wait for a success message to provide your report if you are confident the task is complete with your final action.
+
+## 7. Instructions
 - Translate the provided content directly following these patterns.
 - Overwrite the file `{{args.[0]}}` with the result.

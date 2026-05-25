@@ -52,11 +52,13 @@
   "command": {
     "translate-1st": {
       "description": "1st pass translation to spoken Cantonese",
+      "template": "commands/translate-1st.md",
       "agent": "language-translator",
       "subtask": true
     },
     "translate-2nd": {
       "description": "2nd pass review and polish of Cantonese translation",
+      "template": "commands/translate-2nd.md",
       "agent": "language-translator",
       "subtask": true
     }

@@ -27,7 +27,12 @@ Below is the current content of the file (already translated in 1st pass):
 - [ ] **XHTML Validation:** 0 fatal errors, 0 errors. Preserved all anchor IDs and links.
 - [ ] **Entity Check:** Use proper entities like `&#160;` (non-breaking space).
 
-## 4. Instructions
+## 4. Workflow Optimization (CRITICAL)
+- **Final Report Integration:** To save tokens, assume that once your final action (tool call) succeeds, the Harness may immediately terminate you and return your response to the Main Agent.
+- **Timing:** If you have NO further planned actions, you MUST include a comprehensive summary of your work (the "Final Report") in the same response as your final tool call.
+- **Efficiency:** Do not wait for a success message to provide your report if you are confident the task is complete with your final action.
+
+## 5. Instructions
 - Review the content provided above.
 - Polish it to achieve high-grade colloquial flow based on the standards.
 - Overwrite the file `{{args.[0]}}` with the finalized version.
