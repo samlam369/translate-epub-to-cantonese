@@ -222,3 +222,5 @@ extracted/
 *.epub
 .DS_Store
 *.pyc
+epubcheck*
+*.code-workspace
